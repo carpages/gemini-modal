@@ -1,4 +1,4 @@
-define(['jquery.boiler', 'modules/modal/templates'], function($, T){
+define(['jquery.boiler', 'jquery.modal.templates'], function($, T){
 
   //Make an object to be used by both $.modal and $.fn.modal
   $.Modal = function(options){
