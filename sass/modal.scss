@@ -1,0 +1,33 @@
+/*------------------------------------*\
+    $MODAL BOX
+\*------------------------------------*/
+/**
+  * @module Modal
+  * @description Some CSS for the modal plugin
+  */
+
+.w-modal{
+  @extend .overlay__content--top;
+  height:100%;
+  z-index:1000;
+
+  // A little style out of the box
+  color:$white;
+  background:#000;
+  background:rgba(0,0,0,0.8);
+}
+
+.modal{
+  position:relative;
+  margin:0 auto;
+
+  width:100%;
+  max-width:$large-start;
+}
+
+  .modal__close{
+    cursor:pointer;
+    @extend %icon;
+    @extend .icon--default-close-heavy;
+    @extend .overlay__content--top-right;
+  }
