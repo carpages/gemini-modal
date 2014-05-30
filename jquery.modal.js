@@ -63,6 +63,25 @@ define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($,
          */
         onClose: false,
         /**
+         * Whether to position the modal wrapper as fixed or not. This setting
+         * will cut off content in the screen is small than the containing
+         * content
+         *
+         * @name jquery.modal#fixed
+         * @type boolean
+         * @default false
+         */
+        fixed: false,
+        /**
+         * A selector describing the content of the modal. Anything clicked
+         * outside of these items will close the modal.
+         *
+         * @name jquery.modal#stopPropagation
+         * @type string
+         * @default 'js-modal__content'
+         */
+        stopPropagation: false,
+        /**
          * Precompiled Handlebar templates to replace default. Expecting 'modal'
          * @name jquery.gallery#templates
          * @type object
@@ -90,7 +109,7 @@ define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($,
         $('body').append(plugin.$wrapper);
 
         //Close event on wrapper click and exit click
-        var $stop = plugin.$modal;
+        var $stop = plugin.$wrapper.find(plugin.settings.stopPropagation);
 
         var stop = false;
         plugin.$wrapper.click(function(){
@@ -117,10 +136,14 @@ define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($,
       open: function(){
         var plugin = this;
 
-        //Calculate top
-        var top = ($(window).height() - plugin.$modal.height()) / 2;
-        top = Math.max(top, 0);
-        plugin.$modal.css('top', $(window).scrollTop() + top);
+        //Calculate top if not fixed
+        if(plugin.settings.fixed){
+          plugin.$wrapper.addClass('w-modal--fixed');
+        }else{
+          var top = ($(window).height() - plugin.$modal.height()) / 2;
+          top = Math.max(top, 0);
+          plugin.$modal.css('top', $(window).scrollTop() + top);
+        }
 
 
         plugin.$wrapper.addClass('is-active')._fadeIn(250);
