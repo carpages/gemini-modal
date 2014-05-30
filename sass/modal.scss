@@ -28,10 +28,3 @@
   width:100%;
   max-width:$large-start;
 }
-
-  .modal__close{
-    cursor:pointer;
-    @extend %icon;
-    @extend .icon--default-close-heavy;
-    @extend .overlay__content--top-right;
-  }
