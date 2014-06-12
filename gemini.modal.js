@@ -1,7 +1,7 @@
 /**
  * @fileoverview
 
-A jQuery plugin to to easily pop content up in a modal.
+A Gemini plugin to to easily pop content up in a modal.
 
 ### Notes
 - Requires an include to ``accordian.scss`` in your Gemini build
@@ -11,27 +11,26 @@ A jQuery plugin to to easily pop content up in a modal.
 rendering the same content twice, you can put it in a ``<script>`` tag.
 
  *
- * @namespace jquery.modal
+ * @namespace gemini.modal
  * @copyright Carpages.ca 2014
  * @author Matt Rose <matt@mattrose.ca>
  *
- * @requires jquery
- * @requires jquery.boiler
+ * @requires gemini
  *
- * @prop {string} content {@link jquery.modal#content}
- * @prop {function} onOpen {@link jquery.modal#onOpen}
- * @prop {function} onClose {@link jquery.modal#onClose}
- * @prop {object} templates {@link jquery.modal#templates}
+ * @prop {string} content {@link gemini.modal#content}
+ * @prop {function} onOpen {@link gemini.modal#onOpen}
+ * @prop {function} onClose {@link gemini.modal#onClose}
+ * @prop {object} templates {@link gemini.modal#templates}
  *
  * @example
-  var modal = $.Modal({
+  var modal = G.Modal({
     content: '<h1>Hello World!</h1>'
   });
 
   modal.open();
  */
 
-define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($, T){
+define(['gemini', 'gemini.modal.templates'], function($, T){
 
   //Make an object to be used by both $.modal and $.fn.modal
   $.Modal = function(options){
@@ -41,7 +40,7 @@ define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($,
         /**
          * The HTML content to put in the modal
          *
-         * @name jquery.modal#content
+         * @name gemini.modal#content
          * @type string
          * @default ''
          */
@@ -49,7 +48,7 @@ define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($,
         /**
          * Callback function to run when the modal opens
          *
-         * @name jquery.modal#onOpen
+         * @name gemini.modal#onOpen
          * @type function
          * @default false
          */
@@ -57,7 +56,7 @@ define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($,
         /**
          * Callback function to run when the modal closes
          *
-         * @name jquery.modal#onClose
+         * @name gemini.modal#onClose
          * @type function
          * @default false
          */
@@ -67,7 +66,7 @@ define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($,
          * will cut off content in the screen is small than the containing
          * content
          *
-         * @name jquery.modal#fixed
+         * @name gemini.modal#fixed
          * @type boolean
          * @default false
          */
@@ -76,7 +75,7 @@ define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($,
          * A selector describing the content of the modal. Anything clicked
          * outside of these items will close the modal.
          *
-         * @name jquery.modal#stopPropagation
+         * @name gemini.modal#stopPropagation
          * @type string
          * @default 'js-modal__content'
          */
@@ -131,7 +130,7 @@ define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($,
        * Open the modal
        *
        * @method
-       * @name jquery.modal#open
+       * @name gemini.modal#open
       **/
       open: function(){
         var plugin = this;
@@ -155,7 +154,7 @@ define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($,
        * Close the modal
        *
        * @method
-       * @name jquery.modal#close
+       * @name gemini.modal#close
       **/
       close: function(){
         var plugin = this;
@@ -169,7 +168,7 @@ define(['jquery-loader', 'jquery.modal.templates', 'jquery.boiler'], function($,
        * Update the content inside of the modal
        *
        * @method
-       * @name jquery.modal#update
+       * @name gemini.modal#update
        * @param {string} content The HTML content to put inside of the modal
       **/
       update: function(content){
