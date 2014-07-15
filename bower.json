@@ -3,6 +3,14 @@
   "authors": [
     {"name": "Matt Rose", "email": "matt@mattrose.ca"}
   ],
+  "main": [
+    "gemini.modal.js",
+    "templates.js",
+    "sass/modal.scss"
+  ],
+  "ignore": [
+    "templates"
+  ],
   "dependencies": {
     "gemini-loader": "ssh://git@stash.carpages.ca/gem/gemini-loader.git"
   }
