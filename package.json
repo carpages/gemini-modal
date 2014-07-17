@@ -1,0 +1,13 @@
+{
+  "name": "gemini-modal",
+  "version": "1.0.0",
+  "author": {
+    "name": "Matt Rose",
+    "email": "rose.matt@gmail.com"
+  },
+  "engine": "node >= 0.10.26",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-handlebars": "^0.7.0"
+  }
+}
