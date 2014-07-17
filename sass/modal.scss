@@ -6,25 +6,32 @@
   * @description Some CSS for the modal plugin
   */
 
-.w-modal{
+.modal {
   @extend .overlay__content--top;
-  height:100%;
-  z-index:1000;
+  height: 100%;
+  z-index: 1000;
 
   // A little style out of the box
-  color:$white;
-  background:#000;
-  background:rgba(0,0,0,0.8);
+  color: $white;
+  background: #000;
+  background: rgba(0,0,0,0.8);
 }
   //Used for fixed option
-  .w-modal--fixed{
-    position:fixed;
+  .modal--fixed {
+    position: fixed;
   }
 
-.modal{
-  position:relative;
-  margin:0 auto;
+.modal__content {
+  position: relative;
+  margin: 0 auto;
 
-  width:100%;
-  max-width:$large-start;
+  width: 100%;
+  max-width: $large-start;
+}
+.modal__close {
+  @extend .overlay__content--top-right;
+  @extend %icon;
+  @extend .icon--default-close;
+  padding: $half-spacing-unit $base-spacing-unit;
+  cursor: pointer;
 }
