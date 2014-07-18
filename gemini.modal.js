@@ -77,9 +77,9 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
          *
          * @name gemini.modal#stopPropagation
          * @type string
-         * @default 'js-modal__content'
+         * @default ''
          */
-        stopPropagation: false,
+        stopPropagation: '',
         /**
          * Precompiled Handlebar templates to replace default. Expecting 'modal'
          * @name jquery.gallery#templates
@@ -107,7 +107,10 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
         $('body').append(plugin.$modal);
 
         //Close event on wrapper click and exit click
-        var $stop = plugin.$modal.find(plugin.settings.stopPropagation);
+        var $stop = plugin.$modal.find(
+          '.js-modal__clickable, ' +
+          plugin.settings.stopPropagation
+        );
 
         var stop = false;
         plugin.$modal.click(function(){
