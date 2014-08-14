@@ -32,6 +32,8 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
 
 define(['gemini', 'gemini.modal.templates'], function($, T){
 
+  var _ = $._;
+
   //Make an object to be used by both $.modal and $.fn.modal
   $.Modal = function(options){
 
@@ -77,9 +79,9 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
          *
          * @name gemini.modal#stopPropagation
          * @type string
-         * @default ''
+         * @default '#js-modal__content'
          */
-        stopPropagation: '',
+        stopPropagation: '#js-modal__content',
         /**
          * Precompiled Handlebar templates to replace default. Expecting 'modal'
          * @name jquery.gallery#templates
@@ -108,8 +110,10 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
 
         //Close event on wrapper click and exit click
         var $stop = plugin.$modal.find(
-          '.js-modal__clickable, ' +
+          _.filter([
+            '.js-modal__clickable',
           plugin.settings.stopPropagation
+          ], Boolean).join(', ')
         );
 
         var stop = false;
