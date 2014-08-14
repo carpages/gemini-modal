@@ -32,6 +32,8 @@
   @extend .overlay__content--top-right;
   @extend %icon;
   @extend .icon--default-close;
+  display: none;
+  position: fixed;
   padding: $half-spacing-unit $base-spacing-unit;
   cursor: pointer;
 }

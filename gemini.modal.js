@@ -112,7 +112,7 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
         var $stop = plugin.$modal.find(
           _.filter([
             '.js-modal__clickable',
-          plugin.settings.stopPropagation
+            plugin.settings.stopPropagation
           ], Boolean).join(', ')
         );
 
@@ -152,6 +152,7 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
 
 
         plugin.$modal.addClass('is-active')._fadeIn(250);
+        plugin.$exit.fadeIn(250);
 
         if(plugin.settings.onOpen) plugin.settings.onOpen.call(plugin);
       },
@@ -166,6 +167,7 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
         var plugin = this;
 
         plugin.$modal.removeClass('is-active')._fadeOut(250);
+        plugin.$exit.fadeOut(250);
 
         if(plugin.settings.onClose) plugin.settings.onClose.call(plugin);
       },
