@@ -34,6 +34,10 @@
   @extend .icon--default-close;
   display: none;
   position: fixed;
-  padding: $half-spacing-unit $base-spacing-unit;
+  font-size: $h4-size;
+  padding: $quarter-spacing-unit $half-spacing-unit;
+  top: $half-spacing-unit;
+  right: $half-spacing-unit;
   cursor: pointer;
+  background: #000
 }
