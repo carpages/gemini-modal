@@ -15,6 +15,6 @@
     "node_modules"
   ],
   "dependencies": {
-    "gemini-loader": "ssh://git@stash.carpages.ca/gem/gemini-loader.git"
+    "gemini-loader": "ssh://git@stash.carpages.ca/gem/gemini-loader.git#~0"
   }
 }
