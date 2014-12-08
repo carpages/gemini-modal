@@ -22,6 +22,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
  * @prop {function} onClose {@link gemini.modal#onClose}
  * @prop {integer} fadeIn {@link gemini.modal#fadeIn}
  * @prop {integer} fadeOut {@link gemini.modal#fadeOut}
+ * @prop {boolean} closeable {@link gemini.modal#closeable}
  * @prop {boolean} fixed {@link gemini.modal#fixed}
  * @prop {boolean} stopPropagation {@link gemini.modal#stopPropagation}
  * @prop {object} templates {@link gemini.modal#templates}
@@ -84,6 +85,14 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
          */
         fadeOut: 250,
         /**
+         * Weather or not the user can manually close the modal
+         *
+         * @name gemini.modal#closeable
+         * @type boolean
+         * @default true
+         */
+        closeable: true,
+        /**
          * Whether to position the modal wrapper as fixed or not. This setting
          * will cut off content in the screen is small than the containing
          * content
@@ -128,28 +137,10 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
         //Append modal to body
         $('body').append(plugin.$modal);
 
-        //Close event on wrapper click and exit click
-        var $stop = plugin.$modal.find(
-          _.filter([
-            '.js-modal__clickable',
-            plugin.settings.stopPropagation
-          ], Boolean).join(', ')
-        );
+        if (plugin.settings.closeable) {
+          plugin._closeListeners();
+        }
 
-        var stop = false;
-        plugin.$modal.click(function(){
-          if(stop){
-            stop = false;
-          } else {
-            plugin.close();
-          }
-        });
-        $stop.click(function(e){
-          stop = true;
-        });
-        plugin.$exit.click(function(){
-          plugin.close();
-        });
       },
 
       /**
@@ -172,7 +163,9 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
 
 
         plugin.$modal.addClass('is-active')._fadeIn(plugin.settings.fadeIn);
-        plugin.$exit.fadeIn(plugin.settings.fadeIn);
+        if (plugin.settings.closeable) {
+          plugin.$exit.fadeIn(plugin.settings.fadeIn);
+        }
 
         if(plugin.settings.onOpen) plugin.settings.onOpen.call(plugin);
       },
@@ -187,7 +180,9 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
         var plugin = this;
 
         plugin.$modal.removeClass('is-active')._fadeOut(plugin.settings.fadeOut);
-        plugin.$exit.fadeOut(plugin.settings.fadeOut);
+        if (plugin.settings.closeable) {
+          plugin.$exit.fadeOut(plugin.settings.fadeOut);
+        }
 
         if(plugin.settings.onClose) plugin.settings.onClose.call(plugin);
       },
@@ -201,6 +196,33 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
       **/
       update: function(content){
         plugin.$content.html(content);
+      },
+
+      _closeListeners: function() {
+        var plugin = this;
+
+        //Close event on wrapper click and exit click
+        var $stop = plugin.$modal.find(
+          _.filter([
+            '.js-modal__clickable',
+            plugin.settings.stopPropagation
+          ], Boolean).join(', ')
+        );
+
+        var stop = false;
+        plugin.$modal.click(function(){
+          if(stop){
+            stop = false;
+          } else {
+            plugin.close();
+          }
+        });
+        $stop.click(function(e){
+          stop = true;
+        });
+        plugin.$exit.click(function(){
+          plugin.close();
+        });
       }
     };
 
