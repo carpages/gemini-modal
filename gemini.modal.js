@@ -20,6 +20,10 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
  * @prop {string} content {@link gemini.modal#content}
  * @prop {function} onOpen {@link gemini.modal#onOpen}
  * @prop {function} onClose {@link gemini.modal#onClose}
+ * @prop {integer} fadeIn {@link gemini.modal#fadeIn}
+ * @prop {integer} fadeOut {@link gemini.modal#fadeOut}
+ * @prop {boolean} fixed {@link gemini.modal#fixed}
+ * @prop {boolean} stopPropagation {@link gemini.modal#stopPropagation}
  * @prop {object} templates {@link gemini.modal#templates}
  *
  * @example
@@ -63,6 +67,22 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
          * @default false
          */
         onClose: false,
+        /**
+         * The speed that the modal fades in at in milliseconds
+         *
+         * @name gemini.modal#fadeIn
+         * @type integer
+         * @default 250
+         */
+        fadeIn: 250,
+        /**
+         * The speed that the modal fades out at in milliseconds
+         *
+         * @name gemini.modal#fadeOut
+         * @type integer
+         * @default 250
+         */
+        fadeOut: 250,
         /**
          * Whether to position the modal wrapper as fixed or not. This setting
          * will cut off content in the screen is small than the containing
@@ -151,8 +171,8 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
         }
 
 
-        plugin.$modal.addClass('is-active')._fadeIn(250);
-        plugin.$exit.fadeIn(250);
+        plugin.$modal.addClass('is-active')._fadeIn(plugin.settings.fadeIn);
+        plugin.$exit.fadeIn(plugin.settings.fadeIn);
 
         if(plugin.settings.onOpen) plugin.settings.onOpen.call(plugin);
       },
@@ -166,8 +186,8 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
       close: function(){
         var plugin = this;
 
-        plugin.$modal.removeClass('is-active')._fadeOut(250);
-        plugin.$exit.fadeOut(250);
+        plugin.$modal.removeClass('is-active')._fadeOut(plugin.settings.fadeOut);
+        plugin.$exit.fadeOut(plugin.settings.fadeOut);
 
         if(plugin.settings.onClose) plugin.settings.onClose.call(plugin);
       },
