@@ -110,7 +110,7 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
          * @type string
          * @default '#js-modal__content'
          */
-        stopPropagation: '#js-modal__content',
+        stopPropagation: '.js-modal__content',
         /**
          * Precompiled Handlebar templates to replace default. Expecting 'modal'
          * @name jquery.gallery#templates
@@ -128,8 +128,8 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
 
         //Cache wrapper, modal, and exit
         plugin.$modal = $(plugin.T.modal())._hide();
-        plugin.$content = plugin.$modal.find('#js-modal__content');
-        plugin.$exit = plugin.$modal.find('#js-modal__close');
+        plugin.$content = plugin.$modal.find('.js-modal__content');
+        plugin.$exit = plugin.$modal.find('.js-modal__close');
 
         //Add content
         plugin.$content.html(plugin.settings.content);
