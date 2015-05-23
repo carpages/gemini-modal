@@ -1,18 +1,25 @@
-/*------------------------------------*\
-    $MODAL BOX
-\*------------------------------------*/
 /**
-  * @module Modal
-  * @description Some CSS for the modal plugin
-  */
+ ********************************
+ * _MODAL.SCSS
+ ********************************
+ */
 
+/**
+ * @module Modal [.modal]
+ * @description The CSS for a modal to popup over the page content
+ *
+ * @modifier [.modal--fixed] Fixes the modal to the screen
+ */
 .modal {
-  @extend .overlay__content--top;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   z-index: 1000;
 
   // A little style out of the box
-  color: $white;
+  color: #FFF;
   background: #000;
   background: rgba(0,0,0,0.8);
 }
@@ -21,23 +28,30 @@
     position: fixed;
   }
 
+/**
+ * @submodule Modal Content [.modal__content]
+ * @description The container for the modal's content
+ */
 .modal__content {
   position: relative;
   margin: 0 auto;
 
   width: 100%;
-  max-width: $large-start;
+  max-width: get(large, $gemini-screens);
 }
+
+/**
+ * @submodule Modal Close [.modal__close]
+ * @description The button for closing the modal
+ */
 .modal__close {
-  @extend .overlay__content--top-right;
-  @extend %icon;
-  @extend .icon--default-close;
   display: none;
   position: fixed;
-  font-size: $h4-size;
-  padding: $quarter-spacing-unit $half-spacing-unit;
-  top: $half-spacing-unit;
-  right: $half-spacing-unit;
+  text-align: right;
+  top: get(spacing) / 2;
+  right: get(spacing) / 2;
+  padding: 0 get(spacing) / 2;
+  border: 2px solid #FFF;
+  opacity: 0.75;
   cursor: pointer;
-  background: #000
 }
