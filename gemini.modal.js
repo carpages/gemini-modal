@@ -127,7 +127,7 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
         plugin.T = $.extend(T, plugin.settings.templates);
 
         //Cache wrapper, modal, and exit
-        plugin.$modal = $(plugin.T.modal())._hide();
+        plugin.$modal = $(plugin.T.Modal.modal())._hide();
         plugin.$content = plugin.$modal.find('.js-modal__content');
         plugin.$exit = plugin.$modal.find('.js-modal__close');
 
