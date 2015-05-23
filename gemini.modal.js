@@ -35,7 +35,24 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
   modal.open();
  */
 
-define(['gemini', 'gemini.modal.templates'], function($, T){
+(function(factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define([
+      'gemini',
+      'gemini.modal.templates'
+    ], factory);
+  } else if (typeof exports === 'object') {
+    // Node/CommonJS
+    module.exports = factory(
+      require('gemini'),
+      require('./templates.js')
+    );
+  } else {
+    // Browser globals
+    factory(G, Templates);
+  }
+}(function($, T) {
 
   var _ = $._;
 
@@ -255,4 +272,4 @@ define(['gemini', 'gemini.modal.templates'], function($, T){
   // This way you don't need to require both jquery and the plugin
   return $;
 
-});
+}));
