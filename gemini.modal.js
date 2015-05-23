@@ -5,6 +5,7 @@ A Gemini plugin to to easily pop content up in a modal.
 
 ### Notes
 - Requires an include to ``accordian.scss`` in your Gemini build
+- Without the fixed option set, body height needs to be 100%
 
 ### Features
 - You can call ``$el.modal()`` to put the content of $el into a modal. To avoid
@@ -111,8 +112,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
         closeable: true,
         /**
          * Whether to position the modal wrapper as fixed or not. This setting
-         * will cut off content in the screen is small than the containing
-         * content
+         * will cut off content if the screen is too small.
          *
          * @name gemini.modal#fixed
          * @type boolean
