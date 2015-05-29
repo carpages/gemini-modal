@@ -19,7 +19,7 @@ module.exports = function (grunt) {
     handlebars: {
       compile: {
         options: {
-          amd: true,
+          umd: true,
           namespace: 'Templates.Modal',
           processName: function(filename) {
             return filename.split('/').pop().replace('.hbs','');
