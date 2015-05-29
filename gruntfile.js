@@ -20,7 +20,7 @@ module.exports = function (grunt) {
       compile: {
         options: {
           umd: true,
-          namespace: 'Templates.Modal',
+          namespace: 'Templates.Default.Modal',
           processName: function(filename) {
             return filename.split('/').pop().replace('.hbs','');
           }
