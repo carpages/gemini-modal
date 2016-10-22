@@ -47,7 +47,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
   } else if ( typeof exports === 'object' ) {
     // Node/CommonJS
     module.exports = factory(
-      require( 'gemini' ),
+      require( 'gemini-loader' ),
       require( './templates.js' )
     );
   } else {
