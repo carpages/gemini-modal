@@ -1,3 +1,4 @@
+/* global Templates */
 /**
  * @fileoverview
 
@@ -36,30 +37,28 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
   modal.open();
  */
 
-(function(factory) {
-  if (typeof define === 'function' && define.amd) {
+( function( factory ) {
+  if ( typeof define === 'function' && define.amd ) {
     // AMD. Register as an anonymous module.
     define([
       'gemini',
       'gemini.modal.templates'
-    ], factory);
-  } else if (typeof exports === 'object') {
+    ], factory );
+  } else if ( typeof exports === 'object' ) {
     // Node/CommonJS
     module.exports = factory(
-      require('gemini'),
-      require('./templates.js')
+      require( 'gemini' ),
+      require( './templates.js' )
     );
   } else {
     // Browser globals
-    factory(G, Templates);
+    factory( G, Templates );
   }
-}(function($, T) {
-
+}( function( $, T ) {
   var _ = $._;
 
-  //Make an object to be used by both $.modal and $.fn.modal
-  $.Modal = function(options){
-
+  // Make an object to be used by both $.modal and $.fn.modal
+  $.Modal = function( options ) {
     var plugin = {
       settings: $.extend({}, {
         /**
@@ -70,6 +69,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
          * @default ''
          */
         content: '',
+
         /**
          * Callback function to run when the modal opens
          *
@@ -78,6 +78,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
          * @default false
          */
         onOpen: false,
+
         /**
          * Callback function to run when the modal closes
          *
@@ -86,6 +87,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
          * @default false
          */
         onClose: false,
+
         /**
          * The speed that the modal fades in at in milliseconds
          *
@@ -94,6 +96,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
          * @default 250
          */
         fadeIn: 250,
+
         /**
          * The speed that the modal fades out at in milliseconds
          *
@@ -102,6 +105,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
          * @default 250
          */
         fadeOut: 250,
+
         /**
          * Weather or not the user can manually close the modal
          *
@@ -110,6 +114,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
          * @default true
          */
         closeable: true,
+
         /**
          * Whether to position the modal wrapper as fixed or not. This setting
          * will cut off content if the screen is too small.
@@ -119,6 +124,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
          * @default false
          */
         fixed: false,
+
         /**
          * A selector describing the content of the modal. Anything clicked
          * outside of these items will close the modal.
@@ -128,36 +134,36 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
          * @default '#js-modal__content'
          */
         stopPropagation: '.js-modal__content',
+
         /**
          * Precompiled Handlebar templates to replace default. Expecting 'modal'
          * @name jquery.gallery#templates
          * @type object
          * @default {}
          */
-        templates: {},
-      }, options),
+        templates: {}
+      }, options ),
 
-      init: function(){
+      init: function() {
         var plugin = this;
 
-        //Extend the templates
-        plugin.T = $.extend(T, plugin.settings.templates);
+        // Extend the templates
+        plugin.T = $.extend( T, plugin.settings.templates );
 
-        //Cache wrapper, modal, and exit
-        plugin.$modal = $(plugin.T.modal())._hide();
-        plugin.$content = plugin.$modal.find('.js-modal__content');
-        plugin.$exit = plugin.$modal.find('.js-modal__close');
+        // Cache wrapper, modal, and exit
+        plugin.$modal = $( plugin.T.modal())._hide();
+        plugin.$content = plugin.$modal.find( '.js-modal__content' );
+        plugin.$exit = plugin.$modal.find( '.js-modal__close' );
 
-        //Add content
-        plugin.$content.html(plugin.settings.content);
+        // Add content
+        plugin.$content.html( plugin.settings.content );
 
-        //Append modal to body
-        $('body').append(plugin.$modal);
+        // Append modal to body
+        $( 'body' ).append( plugin.$modal );
 
-        if (plugin.settings.closeable) {
+        if ( plugin.settings.closeable ) {
           plugin._closeListeners();
         }
-
       },
 
       /**
@@ -166,25 +172,24 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
        * @method
        * @name gemini.modal#open
       **/
-      open: function(){
+      open: function() {
         var plugin = this;
 
-        //Calculate top if not fixed
-        if(plugin.settings.fixed){
-          plugin.$modal.addClass('modal--fixed');
-        }else{
-          var top = ($(window).height() - plugin.$content.height()) / 2;
-          top = Math.max(top, 0);
-          plugin.$content.css('top', $(window).scrollTop() + top);
+        // Calculate top if not fixed
+        if ( plugin.settings.fixed ) {
+          plugin.$modal.addClass( 'modal--fixed' );
+        } else {
+          var top = ( $( window ).height() - plugin.$content.height()) / 2;
+          top = Math.max( top, 0 );
+          plugin.$content.css( 'top', $( window ).scrollTop() + top );
         }
 
-
-        plugin.$modal.addClass('is-active')._fadeIn(plugin.settings.fadeIn);
-        if (plugin.settings.closeable) {
-          plugin.$exit.fadeIn(plugin.settings.fadeIn);
+        plugin.$modal.addClass( 'is-active' )._fadeIn( plugin.settings.fadeIn );
+        if ( plugin.settings.closeable ) {
+          plugin.$exit.fadeIn( plugin.settings.fadeIn );
         }
 
-        if(plugin.settings.onOpen) plugin.settings.onOpen.call(plugin);
+        if ( plugin.settings.onOpen ) plugin.settings.onOpen.call( plugin );
       },
 
       /**
@@ -193,15 +198,15 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
        * @method
        * @name gemini.modal#close
       **/
-      close: function(){
+      close: function() {
         var plugin = this;
 
-        plugin.$modal.removeClass('is-active')._fadeOut(plugin.settings.fadeOut);
-        if (plugin.settings.closeable) {
-          plugin.$exit.fadeOut(plugin.settings.fadeOut);
+        plugin.$modal.removeClass( 'is-active' )._fadeOut( plugin.settings.fadeOut );
+        if ( plugin.settings.closeable ) {
+          plugin.$exit.fadeOut( plugin.settings.fadeOut );
         }
 
-        if(plugin.settings.onClose) plugin.settings.onClose.call(plugin);
+        if ( plugin.settings.onClose ) plugin.settings.onClose.call( plugin );
       },
 
       /**
@@ -211,33 +216,33 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
        * @name gemini.modal#update
        * @param {string} content The HTML content to put inside of the modal
       **/
-      update: function(content){
-        plugin.$content.html(content);
+      update: function( content ) {
+        plugin.$content.html( content );
       },
 
       _closeListeners: function() {
         var plugin = this;
 
-        //Close event on wrapper click and exit click
+        // Close event on wrapper click and exit click
         var $stop = plugin.$modal.find(
           _.filter([
             '.js-modal__clickable',
             plugin.settings.stopPropagation
-          ], Boolean).join(', ')
+          ], Boolean ).join( ', ' )
         );
 
         var stop = false;
-        plugin.$modal.click(function(){
-          if(stop){
+        plugin.$modal.click( function() {
+          if ( stop ) {
             stop = false;
           } else {
             plugin.close();
           }
         });
-        $stop.click(function(e){
+        $stop.click( function( e ) {
           stop = true;
         });
-        plugin.$exit.click(function(){
+        plugin.$exit.click( function() {
           plugin.close();
         });
       }
@@ -248,10 +253,10 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
     return plugin;
   };
 
-  $.boiler('modal', {
+  $.boiler( 'modal', {
     defaults: {},
 
-    init: function(){
+    init: function() {
       var plugin = this;
 
       plugin.modal = new $.Modal({
@@ -259,11 +264,11 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
       });
     },
 
-    open: function(){
+    open: function() {
       this.modal.open();
     },
 
-    close: function(){
+    close: function() {
       this.modal.close();
     }
   });
@@ -271,5 +276,4 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
   // Return the jquery object
   // This way you don't need to require both jquery and the plugin
   return $;
-
 }));
