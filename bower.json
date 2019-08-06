@@ -1,13 +1,7 @@
 {
   "name": "gemini-modal",
-  "authors": [
-    {"name": "Matt Rose", "email": "matt@mattrose.ca"}
-  ],
-  "main": [
-    "gemini.modal.js",
-    "templates.js",
-    "sass/modal.scss"
-  ],
+  "authors": [{ "name": "Matt Rose", "email": "matt@mattrose.ca" }],
+  "main": ["gemini.modal.js", "templates.js", "sass/modal.scss"],
   "ignore": [
     "templates",
     "gruntfile.js",
@@ -17,12 +11,12 @@
     "test"
   ],
   "dependencies": {
-    "gemini-loader": "~0",
-    "gemini-css": "~1",
-    "handlebars": "~4"
+    "gemini-loader": "0.5.x",
+    "gemini-css": "1.3.x",
+    "handlebars": "4.x"
   },
   "devDependencies": {
-    "requirejs": "~2",
-    "qunit": "~2"
+    "requirejs": "2.x",
+    "qunit": "2.x"
   }
 }

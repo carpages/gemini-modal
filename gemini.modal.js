@@ -40,109 +40,107 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
 ( function( factory ) {
   if ( typeof define === 'function' && define.amd ) {
     // AMD. Register as an anonymous module.
-    define([
-      'gemini',
-      'gemini.modal.templates'
-    ], factory );
+    define([ 'gemini', 'gemini.modal.templates' ], factory );
   } else if ( typeof exports === 'object' ) {
     // Node/CommonJS
-    module.exports = factory(
-      require( 'gemini-loader' ),
-      require( './templates.js' )
-    );
+    module.exports = factory( require( 'gemini-loader' ), require( './templates.js' ));
   } else {
     // Browser globals
     factory( G, Templates );
   }
-}( function( $, T ) {
+})( function( $, T ) {
   var _ = $._;
 
   // Make an object to be used by both $.modal and $.fn.modal
   $.Modal = function( options ) {
     var plugin = {
-      settings: $.extend({}, {
-        /**
-         * The HTML content to put in the modal
-         *
-         * @name gemini.modal#content
-         * @type string
-         * @default ''
-         */
-        content: '',
+      settings: $.extend(
+        {},
+        {
+          /**
+           * The HTML content to put in the modal
+           *
+           * @name gemini.modal#content
+           * @type string
+           * @default ''
+           */
+          content: '',
 
-        /**
-         * Callback function to run when the modal opens
-         *
-         * @name gemini.modal#onOpen
-         * @type function
-         * @default false
-         */
-        onOpen: false,
+          /**
+           * Callback function to run when the modal opens
+           *
+           * @name gemini.modal#onOpen
+           * @type function
+           * @default false
+           */
+          onOpen: false,
 
-        /**
-         * Callback function to run when the modal closes
-         *
-         * @name gemini.modal#onClose
-         * @type function
-         * @default false
-         */
-        onClose: false,
+          /**
+           * Callback function to run when the modal closes
+           *
+           * @name gemini.modal#onClose
+           * @type function
+           * @default false
+           */
+          onClose: false,
 
-        /**
-         * The speed that the modal fades in at in milliseconds
-         *
-         * @name gemini.modal#fadeIn
-         * @type integer
-         * @default 250
-         */
-        fadeIn: 250,
+          /**
+           * The speed that the modal fades in at in milliseconds
+           *
+           * @name gemini.modal#fadeIn
+           * @type integer
+           * @default 250
+           */
+          fadeIn: 250,
 
-        /**
-         * The speed that the modal fades out at in milliseconds
-         *
-         * @name gemini.modal#fadeOut
-         * @type integer
-         * @default 250
-         */
-        fadeOut: 250,
+          /**
+           * The speed that the modal fades out at in milliseconds
+           *
+           * @name gemini.modal#fadeOut
+           * @type integer
+           * @default 250
+           */
+          fadeOut: 250,
 
-        /**
-         * Weather or not the user can manually close the modal
-         *
-         * @name gemini.modal#closeable
-         * @type boolean
-         * @default true
-         */
-        closeable: true,
+          /**
+           * Weather or not the user can manually close the modal
+           *
+           * @name gemini.modal#closeable
+           * @type boolean
+           * @default true
+           */
+          closeable: true,
 
-        /**
-         * Whether to position the modal wrapper as fixed or not. This setting
-         * will cut off content if the screen is too small.
-         *
-         * @name gemini.modal#fixed
-         * @type boolean
-         * @default false
-         */
-        fixed: false,
+          /**
+           * Whether to position the modal wrapper as fixed or not. This setting
+           * will cut off content if the screen is too small.
+           *
+           * @name gemini.modal#fixed
+           * @type boolean
+           * @default false
+           */
+          fixed: false,
 
-        /**
-         * A selector describing the content of the modal. Anything clicked
-         * outside of these items will close the modal.
-         *
-         * @name gemini.modal#stopPropagation
-         * @type string
-         * @default '#js-modal__content'
-         */
-        stopPropagation: '.js-modal__content',
+          /**
+           * A selector describing the content of the modal. Anything clicked
+           * outside of these items will close the modal.
+           *
+           * @name gemini.modal#stopPropagation
+           * @type string
+           * @default '#js-modal__content'
+           */
+          stopPropagation: '.js-modal__content',
 
-        /**
-         * Precompiled Handlebar templates to replace default. Expecting 'modal'
-         * @name jquery.gallery#templates
-         * @type object
-         * @default {}
-         */
-        templates: {}
-      }, options ),
+          /**
+           * Precompiled Handlebar templates to replace default. Expecting 'modal'
+           * @name jquery.gallery#templates
+           * @type object
+           * @default {}
+           */
+          templates: {}
+        },
+        options
+      ),
 
       init: function() {
         var plugin = this;
@@ -171,7 +169,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
        *
        * @method
        * @name gemini.modal#open
-      **/
+       **/
       open: function() {
         var plugin = this;
 
@@ -197,7 +195,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
        *
        * @method
        * @name gemini.modal#close
-      **/
+       **/
       close: function() {
         var plugin = this;
 
@@ -215,7 +213,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
        * @method
        * @name gemini.modal#update
        * @param {string} content The HTML content to put inside of the modal
-      **/
+       **/
       update: function( content ) {
         plugin.$content.html( content );
       },
@@ -225,10 +223,7 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
 
         // Close event on wrapper click and exit click
         var $stop = plugin.$modal.find(
-          _.filter([
-            '.js-modal__clickable',
-            plugin.settings.stopPropagation
-          ], Boolean ).join( ', ' )
+          _.filter([ '.js-modal__clickable', plugin.settings.stopPropagation ], Boolean ).join( ', ' )
         );
 
         var stop = false;
@@ -276,4 +271,4 @@ rendering the same content twice, you can put it in a ``<script>`` tag.
   // Return the jquery object
   // This way you don't need to require both jquery and the plugin
   return $;
-}));
+});
