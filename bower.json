@@ -12,7 +12,6 @@
     "sass/modal.scss"
   ],
   "ignore": [
-    "templates",
     "gruntfile.js",
     "package.json",
     "node_modules"
